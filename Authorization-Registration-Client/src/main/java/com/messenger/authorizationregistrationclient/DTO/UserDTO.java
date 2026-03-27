@@ -1,4 +1,4 @@
-package com.messenger.authorizationregistrationclient.DAO.DTO;
+package com.messenger.authorizationregistrationclient.DTO;
 
 public class UserDTO {
     Long uuid;
