@@ -12,15 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserRegAuthController {
 
-    @PostMapping("/login/oath2")
-    public ResponseEntity<String> login(@AuthenticationPrincipal OAuth2User user) {
 
-        OAuth2UserDTO oathdto = new OAuth2UserDTO();
-        oathdto.setName(user.getName());
-        System.out.println(oathdto);
-        return ResponseEntity.ok(oathdto.toString());
-
-    }
 
 
 
