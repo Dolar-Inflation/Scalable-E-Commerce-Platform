@@ -19,18 +19,20 @@ public class UserUtility {
     public OAuth2UserService<OidcUserRequest, OidcUser> oauth2UserService() {
         var oidcUserService = new OidcUserService();
 
-        return userRequest -> {
-            var oidcUser = oidcUserService.loadUser(userRequest);
-            var roles = oidcUser.getClaimAsStringList("spring_spec_roles");
-            var authorities = Stream.concat(
-                    oidcUser.getAuthorities().stream(),
-                    roles.stream()
-                            .filter(role-> role.startsWith("ROLE_"))
-                            .map(SimpleGrantedAuthority::new)
-                            .map(GrantedAuthority.class::cast))
-                            .toList();
+//        return userRequest -> {
+//            var oidcUser = oidcUserService.loadUser(userRequest);
 
-                    return new DefaultOidcUser(authorities, oidcUser.getIdToken(),oidcUser.getUserInfo());
+//            var authorities = Stream.concat(
+//                    oidcUser.getAuthorities().stream(),
+//                    roles.stream()
+//                            .filter(role-> role.startsWith("ROLE_"))
+//                            .map(SimpleGrantedAuthority::new)
+//                            .map(GrantedAuthority.class::cast))
+//                            .toList();
+            return userRequest -> {
+                var oidcUser = oidcUserService.loadUser(userRequest);
+
+                    return new DefaultOidcUser(oidcUser.getAuthorities(), oidcUser.getIdToken(),oidcUser.getUserInfo());
 
         };
 

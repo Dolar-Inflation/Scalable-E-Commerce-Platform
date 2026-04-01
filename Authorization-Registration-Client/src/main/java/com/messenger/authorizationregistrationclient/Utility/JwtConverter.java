@@ -18,20 +18,20 @@ public class JwtConverter {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         jwtAuthenticationConverter.setPrincipalClaimName("preferred_username");
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt-> {
-            var authorities = jwtGrantedAuthoritiesConverter.convert(jwt);
-            var roles = jwt.getClaimAsStringList("spring_sec_roles");
-
-            return Stream.concat(
-                    authorities.stream(),
-                    roles.stream()
-
-                            .filter(role->role.startsWith("ROLE_"))
-                            .map(SimpleGrantedAuthority::new)
-                            .map(GrantedAuthority.class::cast))
-                            .toList();
-
-        });
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter::convert);/*jwt-> {*/
+//            var authorities = jwtGrantedAuthoritiesConverter.convert(jwt);
+//
+//
+//            return Stream.concat(
+//                    authorities.stream(),
+//                    roles.stream()
+//
+//                            .filter(role->role.startsWith("ROLE_"))
+//                            .map(SimpleGrantedAuthority::new)
+//                            .map(GrantedAuthority.class::cast))
+//                            .toList();
+//
+//        });
     return jwtAuthenticationConverter;
     }
 

@@ -3,17 +3,19 @@ package com.messenger.offerslistservice.DAO.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
+@Table(name = "favorites")
 @Entity
 @Data
-@Table(name = "product_list")
-public class ProductList {
+public class Favorites {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
-    private String imageUrl;
-    private Double price;
-    private Long popularity;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Buyer buyer;
+
+    @ManyToMany
+    private List<ProductList> productList;
 }

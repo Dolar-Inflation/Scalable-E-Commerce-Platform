@@ -1,5 +1,6 @@
 package com.messenger.authorizationregistrationclient.Configuration;
 
+import com.messenger.authorizationregistrationclient.Services.Oath2EventHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -10,6 +11,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final Oath2EventHandler oath2EventHandler;
+
+    public SecurityConfig(Oath2EventHandler oath2EventHandler) {
+        this.oath2EventHandler = oath2EventHandler;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -30,7 +37,10 @@ public class SecurityConfig {
 //                                .loginPage("/login")
 //                        )
 
-                .oauth2Login(Customizer.withDefaults());
+                .oauth2Login(oauth-> oauth.successHandler(oath2EventHandler));
+
+
+
 
 //                .logout(logout -> logout
 //                        .logoutSuccessUrl("/")
