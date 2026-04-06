@@ -6,8 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
 public class ProductListController {
 
     private final BuyerRepository buyerRepository;
@@ -20,13 +21,13 @@ public class ProductListController {
     @PostMapping("/main")
     public String productlistpage(@RequestBody String sub) {
 
-        if (!buyerRepository.findBuyerBySub(sub)) {
+        if (!buyerRepository.existsBySub(sub)) {
             Buyer buyer = new Buyer();
             buyer.setSub(sub);
             buyerRepository.save(buyer);
-            return "ok";
+            return "Пользователь сохранен:";
         } else {
-            return "ok";
+            return "Пользователь уже есть в базе";
         }
     }
 

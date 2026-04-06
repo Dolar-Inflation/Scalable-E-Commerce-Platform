@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
-    boolean findBuyerBySub(String sub);
+
+    boolean existsBySub(String sub);
 }
+
