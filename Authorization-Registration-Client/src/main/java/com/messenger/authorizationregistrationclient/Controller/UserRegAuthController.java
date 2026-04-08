@@ -18,12 +18,12 @@ public class UserRegAuthController {
 
 
 
-    @GetMapping("/")
-    public String mainPage(Authentication auth) {
-
-
-        return "redirect:/authenticated.html";
-    }
+//    @GetMapping("/")
+//    public String mainPage(Authentication auth) {
+//
+//
+//        return "redirect:/main.html";
+//    }
 
     }
 
