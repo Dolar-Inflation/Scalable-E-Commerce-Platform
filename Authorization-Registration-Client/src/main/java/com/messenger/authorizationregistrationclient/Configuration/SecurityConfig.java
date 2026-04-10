@@ -37,7 +37,9 @@ public class SecurityConfig {
 //                                .loginPage("/login")
 //                        )
 
-                .oauth2Login(oauth-> oauth.successHandler(oath2EventHandler));
+                .oauth2Login(oauth-> oauth
+//                        .defaultSuccessUrl("http://localhost:8081/main.html",true)
+                        .successHandler(oath2EventHandler));
 
 
 
