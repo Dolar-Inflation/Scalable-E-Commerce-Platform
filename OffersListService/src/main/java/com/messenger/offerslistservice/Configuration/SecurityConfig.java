@@ -16,10 +16,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
+
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/","/main","/main.html").permitAll()
+                        .requestMatchers("/","/main","/main.html","/api/me").permitAll()
+                        .requestMatchers("/api/me").authenticated()
+
+
                         .anyRequest().authenticated()
                 )
+
                 .oauth2ResourceServer(oath2 -> oath2.jwt((Customizer.withDefaults())));
         return http.build();
 

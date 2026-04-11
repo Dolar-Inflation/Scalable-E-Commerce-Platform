@@ -55,6 +55,7 @@ public class Oath2EventHandler implements AuthenticationSuccessHandler {
             restTemplate.postForObject("http://localhost:8081/main",
                     entity,
                     String.class);
+            restTemplate.getForObject("http://localhost:8081/api/me", String.class);
 
             response.sendRedirect("http://localhost:8081/");
         }

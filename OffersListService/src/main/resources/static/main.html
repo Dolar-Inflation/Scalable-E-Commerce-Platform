@@ -109,6 +109,13 @@
     </style>
 </head>
 <body>
+<div id="username-box" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+"></div>
 
 <h1>Витрина товаров MARALDS</h1>
 
@@ -155,6 +162,29 @@
     </div>
 
 </div>
+<script>
+    async function loadUser() {
+        try {
+            const response = await fetch('/api/me', {
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                console.error("Ошибка загрузки пользователя");
+                return;
+            }
+
+            const data = await response.json();
+            document.getElementById("username-box").textContent =
+                "Пользователь: " + data.name;
+
+        } catch (e) {
+            console.error("Ошибка запроса:", e);
+        }
+    }
+
+    loadUser();
+</script>
 
 </body>
 </html>
