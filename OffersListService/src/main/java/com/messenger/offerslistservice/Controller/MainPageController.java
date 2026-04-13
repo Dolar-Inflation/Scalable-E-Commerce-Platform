@@ -1,11 +1,13 @@
 package com.messenger.offerslistservice.Controller;
 
 import com.messenger.offerslistservice.Utility.GetUserNameBySub;
+import jakarta.servlet.http.HttpSession;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,9 +23,9 @@ public class MainPageController {
     }
 
     @GetMapping("/")
-    public String mainPage(@AuthenticationPrincipal Jwt jwt) {
+    public String mainPage() {
 
-
+//        model.addAttribute("username", jwt.getClaim("preferred_username"));
 
         return "redirect:/main.html";
     }
