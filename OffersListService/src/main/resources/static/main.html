@@ -161,26 +161,22 @@
         </div>
     </div>
 
+
 </div>
 <script>
     async function loadUser() {
-        try {
-            const response = await fetch('/api/me', {
-                credentials: 'include'
-            });
+        const response = await fetch('/api/me', {
+            credentials: 'include'
+        });
 
-            if (!response.ok) {
-                console.error("Ошибка загрузки пользователя");
-                return;
-            }
-
-            const data = await response.json();
-            document.getElementById("username-box").textContent =
-                "Пользователь: " + data.name;
-
-        } catch (e) {
-            console.error("Ошибка запроса:", e);
+        if (!response.ok) {
+            document.getElementById("username-box").textContent = "Не авторизован";
+            return;
         }
+
+        const data = await response.json();
+        document.getElementById("username-box").textContent =
+            "Пользователь: " + data.name;
     }
 
     loadUser();

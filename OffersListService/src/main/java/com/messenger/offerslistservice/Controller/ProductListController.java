@@ -73,36 +73,20 @@ public class ProductListController {
 
 
 
-//    @GetMapping("/api/me")
-//    public ResponseEntity<Map<String, String>> me() {
-//        String sub = counter.toString();
-//        String username = tempUserStorage.pop(sub);
-//        log.info("username: {}", username);
-//        assert username != null;
-//
-//
-////    return Map.of("name", session.getAttribute("username").toString());
-//        ResponseCookie cookie = ResponseCookie.from("username", username)
-//                .httpOnly(false)
-//                .secure(true)
-//                .sameSite("None")
-//                .path("/")
-//                .maxAge(60 * 60 * 24 * 7)
-//                .build();
-//
-//        return ResponseEntity.ok()
-//                .header("Set-Cookie", cookie.toString())
-//                .body(Map.of("name", username));
-//    }
-@GetMapping("/api/me")
-public Map<String, String> me(
-        @CookieValue(value = "username", required = false) String username
-) {
-    if (username == null) {
-        return Map.of("error", "no username cookie");
-    }
 
-    return Map.of("name", username);
+//@GetMapping("/api/me")
+//public Map<String, String> me(
+//        @CookieValue(value = "username", required = false) String username
+//) {
+//    if (username == null) {
+//        return Map.of("error", "no username cookie");
+//    }
+//
+//    return Map.of("name", username);
+//}
+@GetMapping("/api/me")
+public Map<String, String> me(@AuthenticationPrincipal Jwt jwt) {
+    return Map.of("name", jwt.getClaim("preferred_username"));
 }
 
 
